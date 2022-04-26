@@ -27,9 +27,11 @@ class HistoryPage extends StatelessWidget {
               return VxBox(
                 child: VStack(
                   [
-                    HistoryCard(text: state.history![index][1]),
                     HistoryCard(
-                      text: state.history![index][0],
+                        text:
+                            state.history![index].createdAt!.toIso8601String()),
+                    HistoryCard(
+                      text: state.history![index].text!,
                       height: 160.0,
                     )
                   ],

@@ -11,7 +11,7 @@ extension HistoryStatusExt on HistoryStatus {
 
 class HistoryState extends Equatable {
   final HistoryStatus status;
-  final List<List<String>>? history;
+  final List<Cat>? history;
 
   const HistoryState({
     this.status = HistoryStatus.initial,
@@ -24,7 +24,7 @@ class HistoryState extends Equatable {
   HistoryState copyWith({
     Cat? cat,
     HistoryStatus? status,
-    List<List<String>>? history,
+    List<Cat>? history,
   }) {
     return HistoryState(
       status: status ?? this.status,

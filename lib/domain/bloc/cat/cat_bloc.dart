@@ -23,14 +23,12 @@ class CatBloc extends Bloc<CatEvent, CatState> {
       final cat = await catRepository.getRandomCatInfo();
       emit(state.copyWith(catStatus: CatStatus.success, cat: cat));
 
-      final LazyBox<List<String>> box = Hive.isBoxOpen('cats')
+      final LazyBox<Cat> box = Hive.isBoxOpen('cats')
           ? Hive.lazyBox('cats')
-          : await Hive.openLazyBox<List<String>>('cats');
+          : await Hive.openLazyBox<Cat>('cats');
 
-      await box.put(cat.id, [
-        cat.text!,
-        cat.createdAt!,
-      ]);
+      var id = box.keys.length + 1;
+      await box.put(id, cat);
     } catch (error, stacktrace) {
       Logger().e(stacktrace);
       emit(state.copyWith(catStatus: CatStatus.error));

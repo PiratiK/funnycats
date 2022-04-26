@@ -17,11 +17,11 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       GetHistory event, Emitter<HistoryState> emit) async {
     emit(state.copyWith(status: HistoryStatus.loading));
     try {
-      final LazyBox<List<String>> box = Hive.isBoxOpen('cats')
+      final LazyBox<Cat> box = Hive.isBoxOpen('cats')
           ? Hive.lazyBox('cats')
-          : await Hive.openLazyBox<List<String>>('cats');
+          : await Hive.openLazyBox<Cat>('cats');
 
-      List<List<String>> history = [];
+      List<Cat> history = [];
       for (int i = 0; i < box.keys.length; i++) {
         var currentData = await box.getAt(i);
         // Logger().d(currentData!);
