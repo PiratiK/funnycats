@@ -22,13 +22,10 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
           : await Hive.openLazyBox<Cat>('cats');
 
       List<Cat> history = [];
-      for (int i = 0; i < box.keys.length; i++) {
+      for (int i = box.keys.length - 1; i >= 0; i--) {
         var currentData = await box.getAt(i);
-        // Logger().d(currentData!);
         history.add(currentData!);
       }
-      // box.keys.forEach((element) async {});
-      // Logger().d(history);
 
       emit(state.copyWith(history: history, status: HistoryStatus.success));
     } catch (error, stacktrace) {

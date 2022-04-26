@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:funnycats/presentation/widgets/decoding_text.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class HomeFacts extends StatelessWidget {
@@ -9,9 +10,11 @@ class HomeFacts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return VxBox(
-      child: AutoSizeText(
+      child: DecodingTextEffect(
         text,
-        style: const TextStyle(
+        decodeEffect: DecodeEffect.fromStart,
+        refreshDuration: const Duration(milliseconds: 1),
+        textStyle: const TextStyle(
           fontSize: 24.0,
           color: Colors.amber,
         ),

@@ -1,15 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:funnycats/presentation/pages/home/home_button.dart';
-import 'package:funnycats/presentation/pages/home/home_card.dart';
-import 'package:funnycats/presentation/pages/home/home_facts.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../app/providers/cat_provider.dart';
 import '../../domain/bloc/cat/cat_bloc.dart';
-import '../widgets/non_cache_image.dart';
+import 'home/home_button.dart';
+import 'home/home_card.dart';
+import 'home/home_facts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -54,6 +52,7 @@ class HomePage extends StatelessWidget {
                         context.router.pushNamed('/history-page');
                       },
                       label: 'Fact history',
+                      color: Colors.transparent,
                     ),
                   ],
                 ),

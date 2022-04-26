@@ -20,7 +20,10 @@ class CatBloc extends Bloc<CatEvent, CatState> {
   void _mapGetCatsEventToState(GetCat event, Emitter<CatState> emit) async {
     emit(state.copyWith(catStatus: CatStatus.loading));
     try {
-      final cat = await catRepository.getRandomCatInfo();
+      Cat cat = await catRepository.getRandomCatInfo();
+      while (cat.deleted!) {
+        cat = await catRepository.getRandomCatInfo();
+      }
       emit(state.copyWith(catStatus: CatStatus.success, cat: cat));
 
       final LazyBox<Cat> box = Hive.isBoxOpen('cats')

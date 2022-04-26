@@ -16,7 +16,7 @@ class HomeCard extends StatelessWidget {
     return VxBox(
       child: VxCard(loaded
               ? const NonCacheNetworkImage(AppConstants.imageUrl)
-              : const SizedBox.shrink())
+              : VxBox().color(Colors.blue).make())
           .rounded
           .elevation(10)
           .make(),
