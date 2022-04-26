@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 
-import '../../models/cat_model.dart';
+import '../../../data/models/cat_model.dart';
 import '../../repositories/cat_repository.dart';
 
 part 'cat_event.dart';
@@ -20,17 +20,20 @@ class CatBloc extends Bloc<CatEvent, CatState> {
   void _mapGetCatsEventToState(GetCat event, Emitter<CatState> emit) async {
     emit(state.copyWith(catStatus: CatStatus.loading));
     try {
-      final cat = await catRepository.getRandomCatInfo();
+      Cat cat = await catRepository.getRandomCatInfo();
+
+      while (cat.deleted!) {
+        cat = await catRepository.getRandomCatInfo();
+      }
+      cat.createdAt = DateTime.now();
       emit(state.copyWith(catStatus: CatStatus.success, cat: cat));
 
-      final LazyBox<List<String>> box = Hive.isBoxOpen('cats')
+      final LazyBox<Cat> box = Hive.isBoxOpen('cats')
           ? Hive.lazyBox('cats')
-          : await Hive.openLazyBox<List<String>>('cats');
+          : await Hive.openLazyBox<Cat>('cats');
 
-      await box.put(cat.id, [
-        cat.text!,
-        cat.createdAt!,
-      ]);
+      var id = box.keys.length + 1;
+      await box.put(id, cat);
     } catch (error, stacktrace) {
       Logger().e(stacktrace);
       emit(state.copyWith(catStatus: CatStatus.error));

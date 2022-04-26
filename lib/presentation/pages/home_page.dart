@@ -1,12 +1,13 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../app/providers/cat_provider.dart';
 import '../../domain/bloc/cat/cat_bloc.dart';
-import '../widgets/non_cache_image.dart';
+import 'home/home_button.dart';
+import 'home/home_card.dart';
+import 'home/home_facts.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,75 +35,24 @@ class HomePage extends StatelessWidget {
               return VxBox(
                 child: VStack(
                   [
-                    if (value)
-                      VxBox(
-                        child: const NonCacheNetworkImage(
-                          'https://cataas.com/cat',
-                        ),
-                      )
-                          .width(context.percentWidth * 85.0)
-                          .height(
-                            context.percentWidth * 85.0,
-                          )
-                          .makeCentered(),
-                    if (!value)
-                      VxBox()
-                          .width(context.percentWidth * 85.0)
-                          .height(
-                            context.percentWidth * 85.0,
-                          )
-                          .makeCentered(),
-                    const SizedBox(
-                      height: 20.0,
+                    HomeCard(
+                      loaded: value,
                     ),
-                    VxBox(
-                      child: AutoSizeText(
-                        state.cat == null ? '' : state.cat!.text ?? '',
-                        style: const TextStyle(
-                          fontSize: 24.0,
-                          color: Colors.amber,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ).height(context.percentHeight * 20.0).p16.makeCentered(),
-                    const SizedBox(
-                      height: 20.0,
+                    HomeFacts(
+                      text: state.cat == null ? '' : state.cat!.text ?? '',
                     ),
-                    GestureDetector(
+                    HomeButton(
                       onTap: () {
                         context.read<CatBloc>().add(GetCat());
-                        // imageLoaded.value = false;
                       },
-                      child: VxBox(
-                              child: const Text(
-                        'Another fact!',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16.0),
-                      ))
-                          .alignCenter
-                          .width(150)
-                          .height(50)
-                          .green300
-                          .makeCentered(),
+                      label: 'Another fact!',
                     ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    GestureDetector(
+                    HomeButton(
                       onTap: () {
                         context.router.pushNamed('/history-page');
                       },
-                      child: VxBox(
-                              child: const Text(
-                        'Fact history',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16.0),
-                      ))
-                          .alignCenter
-                          .width(150)
-                          .height(50)
-                          .green300
-                          .makeCentered(),
+                      label: 'Fact history',
+                      color: Colors.transparent,
                     ),
                   ],
                 ),

@@ -2,7 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:velocity_x/velocity_x.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NonCacheNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -29,7 +29,13 @@ class NonCacheNetworkImage extends StatelessWidget {
             fit: BoxFit.cover,
           );
         } else {
-          return VxBox(child: const CircularProgressIndicator()).makeCentered();
+          return Shimmer.fromColors(
+            baseColor: Colors.blue,
+            highlightColor: Colors.yellow,
+            child: const ColoredBox(
+              color: Colors.white,
+            ),
+          );
         }
       },
     );
