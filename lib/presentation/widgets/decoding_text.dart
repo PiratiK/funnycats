@@ -186,7 +186,7 @@ class _DecodingTextEffectState extends State<DecodingTextEffect> {
   String? _currentString;
   DecodeEffect? _effect;
   Duration? _refreshDuration;
-  Duration _defaultRefreshDuration = Duration(milliseconds: 60);
+  final Duration _defaultRefreshDuration = const Duration(milliseconds: 60);
   Timer? _timer;
 
   String _getRandomChar(int codePoint) {

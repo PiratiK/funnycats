@@ -21,6 +21,7 @@ class CatBloc extends Bloc<CatEvent, CatState> {
     emit(state.copyWith(catStatus: CatStatus.loading));
     try {
       Cat cat = await catRepository.getRandomCatInfo();
+
       while (cat.deleted!) {
         cat = await catRepository.getRandomCatInfo();
       }

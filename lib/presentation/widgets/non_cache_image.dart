@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class NonCacheNetworkImage extends StatelessWidget {
   final String imageUrl;
