@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../app/providers/history_provider.dart';
 import '../../domain/bloc/history/history_bloc.dart';
@@ -19,6 +20,10 @@ class HistoryPage extends StatelessWidget {
           child: BlocBuilder<HistoryBloc, HistoryState>(
         buildWhen: (previous, current) => current.status.isSuccess,
         builder: (context, state) {
+          // if (state.history == null) {
+          //   return VxBox(child: const CircularProgressIndicator())
+          //       .makeCentered();
+          // }
           return ListView.builder(
             itemCount: state.history == null ? 0 : state.history!.length,
             itemBuilder: (context, index) {

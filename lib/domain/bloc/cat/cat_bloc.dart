@@ -25,6 +25,7 @@ class CatBloc extends Bloc<CatEvent, CatState> {
       while (cat.deleted!) {
         cat = await catRepository.getRandomCatInfo();
       }
+      cat.createdAt = DateTime.now();
       emit(state.copyWith(catStatus: CatStatus.success, cat: cat));
 
       final LazyBox<Cat> box = Hive.isBoxOpen('cats')

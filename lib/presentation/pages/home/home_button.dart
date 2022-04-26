@@ -17,7 +17,7 @@ class HomeButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: VxBox(
-          child: Text(
+              child: Text(
         label,
         textAlign: TextAlign.center,
         style: const TextStyle(
@@ -25,7 +25,13 @@ class HomeButton extends StatelessWidget {
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-      )).alignCenter.width(150).height(50).color(color).makeCentered(),
+      ))
+          .alignCenter
+          .width(context.percentWidth * 40.0)
+          .height(context.percentWidth * 15.0)
+          .color(color)
+          .rounded
+          .makeCentered(),
     );
   }
 }
