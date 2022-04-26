@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../app/providers/history_provider.dart';
-import '../../domain/bloc/history_bloc.dart';
+import '../../domain/bloc/history/history_bloc.dart';
 import '../widgets/history_card.dart';
 
 class HistoryPage extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '../../domain/models/cat_model.dart';
+import '../models/cat_model.dart';
 
 part 'cat_service.g.dart';
 

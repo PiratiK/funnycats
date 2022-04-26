@@ -1,5 +1,5 @@
+import '../../data/models/cat_model.dart';
 import '../../data/service/cat_service.dart';
-import '../models/cat_model.dart';
 
 class CatRepository {
   final CatService catService;

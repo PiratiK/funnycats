@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:logger/logger.dart';
 
-import '../models/cat_model.dart';
+import '../../../data/models/cat_model.dart';
 
 part 'history_event.dart';
 part 'history_state.dart';
